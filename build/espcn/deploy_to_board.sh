@@ -49,10 +49,10 @@ scp -q "$ESPCN_DIR/board/run_espcn.py" \
        "$ESPCN_DIR/board/input_nhwc_uint8.npy" \
        "$ESPCN_DIR/board/golden_nhwc_uint8.npy" "$HOST:~/$REMOTE/driver/"
 
-# MakePYNQDriver ships finn/util/data_packing.py but only a minimal qonnx subset,
-# while that module imports ModelWrapper/getCustomOp at module level (build-time
-# only). Without the guarded-import fix every generated driver dies on import with
-# ModuleNotFoundError: No module named 'qonnx.core.modelwrapper'.
+# MakePYNQDriver ships finn/util/data_packing.py but only a minimal qonnx subset.
+# Old FINN's data_packing imported ModelWrapper/getCustomOp at module level, so the
+# driver died on import (No module named 'qonnx.core.modelwrapper'); our fork patched
+# it, and upstream 27565ad4 has since fixed it. Copying the fork's file keeps both working.
 FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
 scp -q "$FINN_DIR/src/finn/util/data_packing.py" \
        "$HOST:~/$REMOTE/driver/finn/util/data_packing.py"

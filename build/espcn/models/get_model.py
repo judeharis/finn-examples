@@ -16,7 +16,9 @@ import brevitas
 if not (torch.__version__.startswith("2.7.") and brevitas.__version__ == "0.11.0"):
     raise SystemExit(
         f"get_model.py: torch {torch.__version__} / brevitas {brevitas.__version__}, need 2.7.x / "
-        "0.11.0 -- run it in the FINN container (see above). Nothing was written.")
+        "0.11.0 -- run it in the FINN container of finn branch feature/deconv (db7bd011); the "
+        "upstream-merged container (torch 2.8, brevitas 0.12.2.dev) exports different quantizer "
+        "scales from the same checkpoint. Nothing was written.")
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # get_model_by_name returns the model in TRAIN mode, where every forward updates the BatchNorm

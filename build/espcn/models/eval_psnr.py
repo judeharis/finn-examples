@@ -28,7 +28,7 @@ import brevitas_examples.super_resolution.utils as utils
 if not (torch.__version__.startswith("2.7.") and brevitas.__version__ == "0.11.0"):
     raise SystemExit(
         f"eval_psnr.py: torch {torch.__version__} / brevitas {brevitas.__version__}, need 2.7.x / "
-        "0.11.0 -- run it in the FINN container (see above).")
+        "0.11.0 -- run it in the FINN container of finn branch feature/deconv (db7bd011).")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "data")
