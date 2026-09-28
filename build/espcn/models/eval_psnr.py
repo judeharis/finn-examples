@@ -18,9 +18,17 @@ import onnx
 from onnx import numpy_helper
 import torch
 
+import brevitas
 from brevitas.export import export_qonnx
 import brevitas_examples.super_resolution.models as models
 import brevitas_examples.super_resolution.utils as utils
+
+# The replay only reproduces the deployed export under the container's torch/brevitas (on the
+# host the dataloader yields a different image 0 and export_qonnx fails).
+if not (torch.__version__.startswith("2.7.") and brevitas.__version__ == "0.11.0"):
+    raise SystemExit(
+        f"eval_psnr.py: torch {torch.__version__} / brevitas {brevitas.__version__}, need 2.7.x / "
+        "0.11.0 -- run it in the FINN container (see above).")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "data")

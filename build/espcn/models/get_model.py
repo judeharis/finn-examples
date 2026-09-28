@@ -12,6 +12,11 @@ from brevitas.export import export_qonnx
 #     ./run-docker.sh python /mnt/Crucial/WorkspaceB/AMD/finn-examples/build/espcn/models/get_model.py
 # (with build/espcn bind-mounted, as build_on_host.sh does). The paths below are relative to
 # this file's directory, so it runs from any working directory.
+import brevitas
+if not (torch.__version__.startswith("2.7.") and brevitas.__version__ == "0.11.0"):
+    raise SystemExit(
+        f"get_model.py: torch {torch.__version__} / brevitas {brevitas.__version__}, need 2.7.x / "
+        "0.11.0 -- run it in the FINN container (see above). Nothing was written.")
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # get_model_by_name returns the model in TRAIN mode, where every forward updates the BatchNorm
