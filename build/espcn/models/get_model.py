@@ -9,11 +9,16 @@ from brevitas.export import export_qonnx
 # Run inside the FINN container (torch 2.7.0, brevitas 0.11.0 -- what exported the current
 # qonnx_model.onnx). On the host (torch 2.10, brevitas 0.12.1) the dataloader yields a
 # slightly different image (22,932 of 49,152 input values differ) and export_qonnx fails.
+#     ./run-docker.sh python /mnt/Crucial/WorkspaceB/AMD/finn-examples/build/espcn/models/get_model.py
+# (with build/espcn bind-mounted, as build_on_host.sh does). The paths below are relative to
+# this file's directory, so it runs from any working directory.
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-# get_model_by_name returns the model in TRAIN mode, where Brevitas recalibrates activation
-# quantizer scales from whatever data passes through. Before 2026-09-11 this script ran a
-# train-mode forward on 0..255 data and then exported, so the exported model carries scales
-# shifted by that pass. eval() first keeps the pretrained model exactly as trained.
+# get_model_by_name returns the model in TRAIN mode, where every forward updates the BatchNorm
+# running mean/var. Before 2026-09-11 this script ran a train-mode forward on 0..255 data and
+# then exported, so the deployed qonnx_model.onnx carried bn1-bn3 statistics dragged by that
+# pass (weights and quantizer scales were unaffected) and lost 5.4 dB PSNR (models/eval_psnr.py).
+# eval() first keeps the pretrained model exactly as trained.
 model = models.get_model_by_name('quant_espcn_x2_w4a4_base', True).eval()
 # Jude: Done
 device = 'cuda' if torch.cuda.is_available() else 'cpu'

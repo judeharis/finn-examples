@@ -66,7 +66,19 @@ scp -q "$FINN_DIR/src/finn/util/data_packing.py" \
 # FileNotFoundError on t.xclbin.
 # XILINX_XRT/BOARD come from /etc/profile.d/pynq_venv.sh, which a non-interactive
 # ssh never sources.
+PYNQ_ENV="source /usr/local/share/pynq-venv/bin/activate; export XILINX_XRT=/usr BOARD=KV260"
+
+# Put the board back on its baseline bitstream after every run, pass or fail --
+# requested by the board's owner. The trap covers Ctrl-C and ssh failures too.
+RESET_BIT=/home/ubuntu/bitstreams/CPU_1_0.bit
+reset_board() {
+  echo "resetting $HOST PL to $RESET_BIT ..."
+  ssh "$HOST" "$PYNQ_ENV; python -u -c 'from pynq import Overlay; \
+      o = Overlay(\"$RESET_BIT\"); print(\"reset ok:\", o.bitfile_name, o.is_loaded())'" \
+    || echo "WARNING: board reset FAILED -- load $RESET_BIT by hand"
+}
+trap reset_board EXIT
+
 echo "running on $HOST ..."
-ssh "$HOST" "source /usr/local/share/pynq-venv/bin/activate; \
-             export XILINX_XRT=/usr BOARD=KV260; \
-             cd ~/$REMOTE/driver && python run_espcn.py --runs 5"
+# -u: over a non-tty ssh, python block-buffers stdout and nothing shows until exit
+ssh "$HOST" "$PYNQ_ENV; cd ~/$REMOTE/driver && python -u run_espcn.py --runs 5"
