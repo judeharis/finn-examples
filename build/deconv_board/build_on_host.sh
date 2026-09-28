@@ -20,15 +20,7 @@ FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
 DECONV_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG="${DECONV_DIR}/build_on_host_pe${PE}_simd${SIMD}_${CLK_NS}ns.log"
 
-# These normally come from ~/.bashrc, which a non-interactive shell (cron, ssh,
-# an agent) never sources. Without them run-docker.sh refuses to start, and
-# env.sh trips `set -u` on FINN_DOCKER_EXTRA before anything reaches the log.
-: "${FINN_XILINX_PATH:=/mnt/Crucial/Xilinx2024/}"
-: "${FINN_XILINX_VERSION:=2024.1}"
-: "${NUM_DEFAULT_WORKERS:=16}"
-: "${FINN_DOCKER_EXTRA:=}"
-export FINN_XILINX_PATH FINN_XILINX_VERSION NUM_DEFAULT_WORKERS FINN_DOCKER_EXTRA
-
+# env.sh supplies FINN_XILINX_PATH etc. when ~/.bashrc hasn't (non-interactive shells).
 cd "$FINN_DIR" || exit 1
 # shellcheck disable=SC1091
 source ./env.sh
