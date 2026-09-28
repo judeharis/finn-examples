@@ -57,3 +57,24 @@ export_qonnx(
     export_path=f"../quant_espcn_x2_w4a4_base/qonnx_model.onnx",
     opset_version=13)
 print(f"Saved QONNX model to ../quant_espcn_x2_w4a4_base/qonnx_model.onnx")
+
+# Jude: Edited
+# FINN's verify_steps compare at a hard-coded atol=1e-3, below one output level (1/255), and
+# Brevitas (float) and FINN (integer) disagree by 1-3 levels on ~135 of 196,608 values at
+# quantization boundaries -- so against output.npy every step reports FAIL on a correct build.
+# output_qonnx.npy is the reference build.py verifies against instead: qonnx's own executor
+# run on the exported model, independent of the FINN build. The input is divided by 255 in
+# float32 exactly as the ToTensor Div node custom_step_add_pre_proc prepends.
+from qonnx.core.modelwrapper import ModelWrapper
+from qonnx.core.onnx_exec import execute_onnx
+from qonnx.transformation.infer_shapes import InferShapes
+
+qmodel = ModelWrapper("../quant_espcn_x2_w4a4_base/qonnx_model.onnx").transform(InferShapes())
+qin = inp.cpu().numpy().astype(np.float32) / np.float32(255)
+qout = execute_onnx(qmodel, {qmodel.graph.input[0].name: qin})[qmodel.graph.output[0].name]
+with open("../quant_espcn_x2_w4a4_base/output_qonnx.npy", "wb") as f:
+        np.save(f, qout)
+lv = np.round(np.abs(qout - golden.cpu().numpy()) * 255)
+print(f"Saved ../quant_espcn_x2_w4a4_base/output_qonnx.npy; vs Brevitas output.npy: "
+      f"{int((lv == 0).sum())} equal, {int((lv > 0).sum())} differ, max {int(lv.max())} levels")
+# Jude: Done

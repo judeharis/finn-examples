@@ -21,9 +21,8 @@ REMOTE=espcn-finn
 
 # --- prepare the I/O vectors in the layout the accelerator wants ---------------
 # The accelerator takes UINT8 NHWC (1,128,128,3); input.npy is NCHW float32 already
-# scaled to 0..255. The golden is the build's own folded-HLS-cppsim output, NOT
-# quant_espcn_x2_w4a4_base/output.npy -- see the notes in run_espcn.py for why that
-# reference is broken.
+# scaled to 0..255. The golden is the build's own folded-HLS-cppsim output, NOT the
+# Brevitas quant_espcn_x2_w4a4_base/output.npy -- see the notes in run_espcn.py.
 GOLD=$(ls -t "$OUT"/verification_output/verify_folded_hls_cppsim_0_*.npy 2>/dev/null | head -1)
 [ -n "$GOLD" ] || { echo "no cppsim golden in $OUT/verification_output"; exit 1; }
 

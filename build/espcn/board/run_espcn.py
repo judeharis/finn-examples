@@ -13,11 +13,11 @@ as root (PYNQ needs /dev/mem):
 Why not the shipped validate.py: it hardcodes `--dataset mnist|cifar10` and a
 top-1 accuracy metric, which means nothing for super-resolution.
 
-On the golden: do NOT use quant_espcn_x2_w4a4_base/output.npy. models/get_model.py
-saves it as model(round(x*255)) -- feeding 0..255 into a model that expects [0,1],
-which saturates the quantizers. The FINN graph prepends ToTensor() (/255) and so
-computes the correct thing; the two disagree with pearson r = 0.15. The build's own
-verify_folded_hls_cppsim output is the right reference for the hardware.
+On the golden: use the build's own verify_folded_hls_cppsim output -- the post-HLS
+behaviour of the exact design synthesised. It equals quant_espcn_x2_w4a4_base/
+output_qonnx.npy bit for bit. The Brevitas output.npy is NOT a hardware golden: it
+differs from the integer datapath by 1-3 levels on ~135 of 196,608 values.
+(Before 2026-09-11 output.npy was also computed on 0..255 input, pearson r = 0.15.)
 """
 import argparse
 import time

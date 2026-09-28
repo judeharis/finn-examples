@@ -91,7 +91,13 @@ cfg = build_cfg.DataflowBuildConfig(
     auto_fifo_depths=False,
     rtlsim_batch_size=100,
     verify_input_npy="quant_espcn_x2_w4a4_base/input.npy",
-    verify_expected_output_npy="quant_espcn_x2_w4a4_base/output.npy",
+    # Jude: Edited
+    # qonnx execution of the exported model, not the Brevitas output.npy: the two differ by
+    # 1-3 levels on ~135 values at quantization boundaries, and verify_step's hard-coded
+    # atol=1e-3 is below one level (1/255), so output.npy fails every step of a correct build.
+    # Written by models/get_model.py.
+    verify_expected_output_npy="quant_espcn_x2_w4a4_base/output_qonnx.npy",
+    # Jude: Done
     verify_steps=[
         build_cfg.VerificationStepType.QONNX_TO_FINN_PYTHON,
         build_cfg.VerificationStepType.TIDY_UP_PYTHON,
