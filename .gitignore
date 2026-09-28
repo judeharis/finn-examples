@@ -16,3 +16,6 @@ build/finn
 output_*/
 release/
 *.egg-info
+# Jude: Edited
+build/espcn/data/
+# Jude: Done

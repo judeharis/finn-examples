@@ -1,0 +1,1163 @@
+[
+  {
+    "name": "cfg_001",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      2,
+      2
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 4,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_002",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      2,
+      2
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 4,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_003",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      2,
+      2
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 4,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_004",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      3,
+      3
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 9,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_005",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      3,
+      3
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 9,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_006",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      3,
+      3
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 9,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_007",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      4,
+      4
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 16,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_008",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      4,
+      4
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 16,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_009",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      1,
+      1
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "kernel_hw_tconv": [
+      4,
+      4
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 1,
+    "tconv_entries_per_channel_pair": 16,
+    "reachable_dof_upper_bound": 1
+  },
+  {
+    "name": "cfg_010",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      4,
+      4
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 16,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_011",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      4,
+      4
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 16,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_012",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      4,
+      4
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 16,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_013",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      5,
+      5
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 25,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_014",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      5,
+      5
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 25,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_015",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      5,
+      5
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 25,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_016",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      6,
+      6
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 36,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_017",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      6,
+      6
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 36,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_018",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      3,
+      3
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "kernel_hw_tconv": [
+      6,
+      6
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 9,
+    "tconv_entries_per_channel_pair": 36,
+    "reachable_dof_upper_bound": 9
+  },
+  {
+    "name": "cfg_019",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      6,
+      6
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 36,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_020",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      6,
+      6
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 36,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_021",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 2,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      6,
+      6
+    ],
+    "stride_hw_tconv": [
+      2,
+      2
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 36,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_022",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      7,
+      7
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 49,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_023",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      7,
+      7
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 49,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_024",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 3,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      7,
+      7
+    ],
+    "stride_hw_tconv": [
+      3,
+      3
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 49,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_025",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 8,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      8,
+      8
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 64,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_026",
+    "supported": true,
+    "in_ch": 8,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      8,
+      8
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 64,
+    "reachable_dof_upper_bound": 25
+  },
+  {
+    "name": "cfg_027",
+    "supported": true,
+    "in_ch": 16,
+    "out_ch": 16,
+    "kernel_hw_conv": [
+      5,
+      5
+    ],
+    "resize_scale": 4,
+    "stride_hw_conv": [
+      1,
+      1
+    ],
+    "pads_tlbr_conv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "kernel_hw_tconv": [
+      8,
+      8
+    ],
+    "stride_hw_tconv": [
+      4,
+      4
+    ],
+    "pads_tlbr_tconv": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "group_tconv": 1,
+    "dilation_hw_tconv": [
+      1,
+      1
+    ],
+    "conv_params_per_channel_pair": 25,
+    "tconv_entries_per_channel_pair": 64,
+    "reachable_dof_upper_bound": 25
+  }
+]

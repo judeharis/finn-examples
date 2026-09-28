@@ -47,14 +47,28 @@ espcn_build_steps = [
     "step_target_fps_parallelization",
     "step_apply_folding_config",
     "step_minimize_bit_width",
-    "step_transpose_decomposition",
+    # Jude: Edited, Removed
+    # Keep commented: step_transpose_decomposition does not exist in this FINN
+    # (v0.10.1-742-gee7d7115). String steps are resolved by a bare dict lookup,
+    # build_dataflow_step_lookup[name] in build_dataflow.py:73, so enabling it
+    # raises KeyError before the build does any work. It appears to come from a
+    # newer FINN branch. Not needed here: it would decompose the Transpose nodes
+    # InferPixelPaddingDeconv leaves behind, and custom_step_streamline already
+    # absorbs those.
+    # "step_transpose_decomposition",
+    # Jude: Done
     "step_generate_estimate_reports",
     "step_hw_codegen",
     "step_hw_ipgen",
     "step_set_fifo_depths",
     "step_create_stitched_ip",
-    "step_measure_rtlsim_performance",
-    "step_out_of_context_synthesis",
+    # Jude: Edited, Removed
+    # step_measure_rtlsim_performance dropped: critical_path_cycles is 104,263,595 and
+    # rtlsim_batch_size is 100, i.e. ~1e10 cycles of XSI simulation. This is what the
+    # 2026-03-12 run stalled inside (log ends mid-step, no traceback).
+    # step_out_of_context_synthesis dropped: gated on DataflowOutputType.OOC_SYNTH, which
+    # is not in generate_outputs, so it was a no-op anyway.
+    # Jude: Done
     "step_synthesize_bitfile",
     "step_make_driver",
     "step_deployment_package",
@@ -87,8 +101,14 @@ cfg = build_cfg.DataflowBuildConfig(
     generate_outputs=[
         build_cfg.DataflowOutputType.ESTIMATE_REPORTS,
         build_cfg.DataflowOutputType.STITCHED_IP,
-        build_cfg.DataflowOutputType.RTLSIM_PERFORMANCE,
+        # Jude: Edited, Removed
         build_cfg.DataflowOutputType.BITFILE,
+        # Without these two, step_make_driver and step_deployment_package are both
+        # wholly wrapped in an `if <type> in cfg.generate_outputs` and silently emit
+        # nothing -- no driver/ and no deploy/, so nothing to put on the board.
+        build_cfg.DataflowOutputType.PYNQ_DRIVER,
+        build_cfg.DataflowOutputType.DEPLOYMENT_PACKAGE,
+        # Jude: Done
     ],
 )
 
