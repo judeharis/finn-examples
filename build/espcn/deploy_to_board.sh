@@ -57,6 +57,23 @@ FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
 scp -q "$FINN_DIR/src/finn/util/data_packing.py" \
        "$HOST:~/$REMOTE/driver/finn/util/data_packing.py"
 
+# Newer qonnx (the merged FINN image) has a module-level `from onnx import GraphProto,
+# ModelProto` in qonnx/util/basic.py, used only as annotations on qonnx_make_model.
+# The board's PYNQ venv has no onnx, so the driver dies on import. Guard it in the
+# board-side copy rather than installing onnx into the shared venv.
+ssh "$HOST" "python3 - ~/$REMOTE/driver/qonnx/util/basic.py" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p).read()
+old = "from onnx import GraphProto, ModelProto\n"
+new = ("try:\n    from onnx import GraphProto, ModelProto\n"
+       "except ImportError:  # board venv has no onnx; annotations only\n"
+       "    GraphProto = ModelProto = object\n")
+if old in s:
+    open(p, "w").write(s.replace(old, new, 1))
+    print("guarded onnx import in driver/qonnx/util/basic.py")
+PY
+
 # --- run ----------------------------------------------------------------------
 # `source activate` matters beyond picking the interpreter: it puts
 # /usr/local/share/pynq-venv/bin first on PATH, which is where the *working*
