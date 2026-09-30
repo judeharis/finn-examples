@@ -16,7 +16,8 @@ import brevitas
 if not (torch.__version__.startswith("2.7.") and brevitas.__version__ == "0.11.0"):
     raise SystemExit(
         f"get_model.py: torch {torch.__version__} / brevitas {brevitas.__version__}, need 2.7.x / "
-        "0.11.0 -- run it in the FINN container of finn branch feature/deconv (db7bd011); the "
+        "0.11.0 -- run it in the pre-merge FINN image (finn db7bd011): run-docker.sh with "
+        "FINN_DOCKER_TAG=xilinx/finn:v0.10.1-743-gdb7bd011.xrt_202220.2.14.354_22.04-amd64-xrt; the "
         "upstream-merged container (torch 2.8, brevitas 0.12.2.dev) exports different quantizer "
         "scales from the same checkpoint. Nothing was written.")
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
