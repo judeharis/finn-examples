@@ -174,8 +174,10 @@ def main():
 
     # The graph is already all-HW and already specialized, so everything before
     # step_create_dataflow_partition (tidy-up, streamlining, convert_to_hw,
-    # specialize_layers) has nothing to do and is left out. step_apply_folding_config
-    # stays for its FOLDED_HLS_CPPSIM verification; PE/SIMD are already set on the node.
+    # specialize_layers) has nothing to do and is left out. PE/SIMD are already set on the
+    # node. On FINN dev the FOLDED_HLS_CPPSIM verification runs in step_minimize_bit_width
+    # (it used to run in step_apply_folding_config), so that step is in the list: for a lone
+    # Deconvolution it changes nothing else (no minimize_* methods, no thresholds).
     # FINN dev refuses a build with neither target_fps nor folding_config_file
     # (config check "folding_missing"), so the same PE/SIMD also go into a config file.
     fold_json = os.path.join(out_dir, "folding_config.json")
@@ -184,6 +186,7 @@ def main():
     steps = [
         "step_create_dataflow_partition",
         "step_apply_folding_config",
+        "step_minimize_bit_width",
         "step_generate_estimate_reports",
         "step_hw_codegen",
         "step_hw_ipgen",
