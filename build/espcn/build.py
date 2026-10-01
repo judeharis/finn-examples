@@ -33,6 +33,19 @@ import finn.builder.build_dataflow_config as build_cfg
 from finn.builder.build_dataflow_steps import *
 
 model_name = "espcn-bsd300"
+# Jude: Edited
+# FUSED_DECONV comes from custom_steps (default on; env ESPCN_FUSED_DECONV=0 for pixel
+# padding, which builds into output_..._pixelpad). folding_config_chrc_cap.json names nodes of an older FINN
+# (MatrixVectorActivation_0, ...) that no longer exist, so it is a no-op and SetFolding
+# does all folding. The fused build pins every non-deconv layer (Thresholding, FMPadding, SWG,
+# MVAU) to the pixel-padding build's folding, so the deconv is the only difference; without
+# the pins SetFolding's two-pass relaxation re-folds them to the deconv's pace. The deconv
+# itself is left to SetFolding (PE3/SIMD4 for ESPCN).
+variant = "" if FUSED_DECONV else "_pixelpad"
+folding_config = (
+    "folding_config_fused_deconv.json" if FUSED_DECONV else "folding_config_chrc_cap.json"
+)
+# Jude: Done
 
 
 espcn_build_steps = [
@@ -78,7 +91,9 @@ model_file = "quant_espcn_x2_w4a4_base/qonnx_model.onnx"
 
 cfg = build_cfg.DataflowBuildConfig(
     steps=espcn_build_steps,
-    output_dir="output_%s_kriasom" % (model_name),
+    # Jude: Edited
+    output_dir="output_%s_kriasom%s" % (model_name, variant),
+    # Jude: Done
     synth_clk_period_ns=5.0,
     target_fps=10000,
     fpga_part="xck26-sfvc784-2LV-c",
@@ -87,7 +102,9 @@ cfg = build_cfg.DataflowBuildConfig(
     enable_build_pdb_debug=False,
     verbose=False,
     split_large_fifos=True,
-    folding_config_file="folding_config_chrc_cap.json",
+    # Jude: Edited
+    folding_config_file=folding_config,
+    # Jude: Done
     auto_fifo_depths=False,
     rtlsim_batch_size=100,
     verify_input_npy="quant_espcn_x2_w4a4_base/input.npy",

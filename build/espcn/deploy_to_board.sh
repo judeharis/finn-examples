@@ -12,7 +12,13 @@ set -euo pipefail
 
 HOST="${1:-kriaB}"
 ESPCN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-OUT="$ESPCN_DIR/output_espcn-bsd300_kriasom"
+# Default: the fused-deconv build. ESPCN_FUSED_DECONV=0 deploys the pixel-padding build
+# instead (build_on_host.sh, same flag).
+if [ "${ESPCN_FUSED_DECONV:-1}" = 1 ]; then
+  OUT="$ESPCN_DIR/output_espcn-bsd300_kriasom"
+else
+  OUT="$ESPCN_DIR/output_espcn-bsd300_kriasom_pixelpad"
+fi
 DEPLOY="$OUT/deploy"
 REMOTE=espcn-finn
 

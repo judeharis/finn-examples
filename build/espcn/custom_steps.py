@@ -51,6 +51,15 @@ from finn.transformation.streamline import Streamline
 from finn.transformation.streamline.round_thresholds import RoundAndClipThresholds
 from finn.transformation.streamline.reorder import MoveScalarMulPastConvTranspose
 from finn.transformation.fpgadataflow.infer_pixel_padding_deconv import InferPixelPaddingDeconv
+# Jude: Edited
+import os
+from finn.transformation.fpgadataflow.infer_deconvolution import InferDeconvolution
+
+# By default the ConvTranspose becomes one fused Deconvolution_hls layer (InferDeconvolution).
+# ESPCN_FUSED_DECONV=0 selects the original pixel padding instead (FMPadding_Pixel + FMPadding
+# + SWG + MVAU); build.py gives that build its own output dir and folding config.
+FUSED_DECONV = os.environ.get("ESPCN_FUSED_DECONV", "1") == "1"
+# Jude: Done
 
 from finn.builder.build_dataflow_config import DataflowBuildConfig, VerificationStepType
 from finn.builder.build_dataflow_steps import verify_step
@@ -130,7 +139,17 @@ def custom_step_convert_to_hw(model: ModelWrapper, cfg: DataflowBuildConfig):
         model = model.transform(to_hw.InferThresholdingLayer())
     need_convtranspose = len(model.get_nodes_by_op_type("ConvTranspose")) > 0
     if need_convtranspose:
-        model = model.transform(InferPixelPaddingDeconv())
+        # Jude: Edited
+        if FUSED_DECONV:
+            # Deconvolution outputs the raw INT32 accumulator; the 255-level MultiThreshold
+            # after it stays separate and becomes a Thresholding layer further down.
+            model = model.transform(InferDeconvolution())
+            assert len(model.get_nodes_by_op_type("ConvTranspose")) == 0, (
+                "InferDeconvolution left a ConvTranspose behind, see its warning"
+            )
+        else:
+            model = model.transform(InferPixelPaddingDeconv())
+        # Jude: Done
         model = model.transform(absorb.AbsorbTransposeIntoMultiThreshold())
         model = model.transform(RoundAndClipThresholds())
     # needed for non-bipolar MatMul layers

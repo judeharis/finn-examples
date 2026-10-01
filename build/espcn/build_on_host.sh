@@ -2,7 +2,8 @@
 # Jude: Created
 # Host-side launcher for the ESPCN FINN build. Runs unattended.
 #
-#   ./build_on_host.sh            # logs to build_on_host.log
+#   ./build_on_host.sh                        # fused deconv (default), logs to build_on_host.log
+#   ESPCN_FUSED_DECONV=0 ./build_on_host.sh   # pixel padding, logs to build_on_host_pixelpad.log
 #
 # Two non-obvious requirements, both handled here:
 #  1. build/espcn lives OUTSIDE $FINN_ROOT (the FINN fork at AMD/finn), so
@@ -19,12 +20,17 @@ set -uo pipefail
 # (get-finn.sh) -- do not run get-finn.sh. Override FINN_DIR to use another checkout.
 FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
 ESPCN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LOG="${ESPCN_DIR}/build_on_host.log"
+# Default: fused Deconvolution_hls layer, into output_espcn-bsd300_kriasom/.
+# ESPCN_FUSED_DECONV=0 ./build_on_host.sh  builds the original pixel-padding version into
+# output_espcn-bsd300_kriasom_pixelpad/, logging to build_on_host_pixelpad.log (see custom_steps.py).
+FUSED="${ESPCN_FUSED_DECONV:-1}"
+if [ "$FUSED" = 1 ]; then LOG="${ESPCN_DIR}/build_on_host.log"; else LOG="${ESPCN_DIR}/build_on_host_pixelpad.log"; fi
 
 cd "$FINN_DIR" || exit 1
 # shellcheck disable=SC1091
 source ./env.sh
-export FINN_DOCKER_EXTRA="${FINN_DOCKER_EXTRA} -v ${ESPCN_DIR}:${ESPCN_DIR} "
+# run-docker.sh passes no environment of its own accord
+export FINN_DOCKER_EXTRA="${FINN_DOCKER_EXTRA} -v ${ESPCN_DIR}:${ESPCN_DIR} -e ESPCN_FUSED_DECONV=${FUSED} "
 
 {
   echo "=== launching $(date -Is) ==="

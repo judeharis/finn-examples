@@ -1,0 +1,42 @@
+{
+  "Defaults": {},
+  "Thresholding_rtl_0": {
+    "PE": 1
+  },
+  "FMPadding_rtl_0": {
+    "SIMD": 1
+  },
+  "ConvolutionInputGenerator_rtl_0": {
+    "SIMD": 1,
+    "parallel_window": 0
+  },
+  "MVAU_hls_0": {
+    "PE": 1,
+    "SIMD": 5
+  },
+  "FMPadding_rtl_1": {
+    "SIMD": 1
+  },
+  "ConvolutionInputGenerator_rtl_1": {
+    "SIMD": 1,
+    "parallel_window": 0
+  },
+  "MVAU_hls_1": {
+    "PE": 4,
+    "SIMD": 9
+  },
+  "FMPadding_rtl_2": {
+    "SIMD": 1
+  },
+  "ConvolutionInputGenerator_rtl_2": {
+    "SIMD": 1,
+    "parallel_window": 0
+  },
+  "MVAU_hls_2": {
+    "PE": 2,
+    "SIMD": 9
+  },
+  "Thresholding_rtl_1": {
+    "PE": 1
+  }
+}
