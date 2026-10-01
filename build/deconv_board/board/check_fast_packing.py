@@ -10,7 +10,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-FINN_DIR = os.environ.get("FINN_DIR", "/mnt/Crucial/WorkspaceB/AMD/finn")
+FINN_DIR = os.environ.get("FINN_DIR", "/mnt/Crucial/WorkspaceB/AMD/forked/finn")
 sys.path.insert(0, os.path.join(FINN_DIR, "src"))
 from qonnx.core.datatype import DataType  # noqa: E402
 from qonnx.util.basic import gen_finn_dt_tensor  # noqa: E402
@@ -23,9 +23,9 @@ ok = True
 cases = [(DataType[d], n) for d in ("UINT4", "INT4", "UINT8", "INT8", "INT21", "INT32") for n in (1, 2, 3, 4, 8)]
 for dt, n in cases:
     x = gen_finn_dt_tensor(dt, (2, 5, 7, 3, n))
-    ref = finnpy_to_packed_bytearray(x, dt, reverse_inner=True, reverse_endian=True, fast_mode=True)
+    ref = finnpy_to_packed_bytearray(x, dt, reverse_inner=True, reverse_endian=True)
     got = fast_packing.pack(x, dt.bitwidth(), dt.signed())
-    back_ref = packed_bytearray_to_finnpy(ref, dt, x.shape, reverse_inner=True, reverse_endian=True, fast_mode=True)
+    back_ref = packed_bytearray_to_finnpy(ref, dt, x.shape, reverse_inner=True, reverse_endian=True)
     back = fast_packing.unpack(got, dt.bitwidth(), dt.signed(), n).reshape(x.shape)
     good = ref.shape == got.shape and np.array_equal(ref, got) and np.array_equal(back, back_ref) \
         and np.array_equal(back, x)

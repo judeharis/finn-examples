@@ -176,6 +176,11 @@ def main():
     # step_create_dataflow_partition (tidy-up, streamlining, convert_to_hw,
     # specialize_layers) has nothing to do and is left out. step_apply_folding_config
     # stays for its FOLDED_HLS_CPPSIM verification; PE/SIMD are already set on the node.
+    # FINN dev refuses a build with neither target_fps nor folding_config_file
+    # (config check "folding_missing"), so the same PE/SIMD also go into a config file.
+    fold_json = os.path.join(out_dir, "folding_config.json")
+    with open(fold_json, "w") as f:
+        json.dump({"Defaults": {}, "Deconvolution_hls_0": {"PE": PE, "SIMD": SIMD}}, f, indent=2)
     steps = [
         "step_create_dataflow_partition",
         "step_apply_folding_config",
@@ -200,6 +205,7 @@ def main():
         # the whole ~5e7-cycle layer in XSI. A single node between two IODMAs needs
         # no FIFO sizing: the chain is linear, so FIFO depth cannot deadlock it.
         auto_fifo_depths=False,
+        folding_config_file=fold_json,
         enable_build_pdb_debug=False,
         verbose=False,
         verify_input_npy=in_npy,

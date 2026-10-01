@@ -55,13 +55,9 @@ scp -q "$ESPCN_DIR/board/run_espcn.py" \
        "$ESPCN_DIR/board/input_nhwc_uint8.npy" \
        "$ESPCN_DIR/board/golden_nhwc_uint8.npy" "$HOST:~/$REMOTE/driver/"
 
-# MakePYNQDriver ships finn/util/data_packing.py but only a minimal qonnx subset.
-# Old FINN's data_packing imported ModelWrapper/getCustomOp at module level, so the
-# driver died on import (No module named 'qonnx.core.modelwrapper'); our fork patched
-# it, and upstream 27565ad4 has since fixed it. Copying the fork's file keeps both working.
-FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
-scp -q "$FINN_DIR/src/finn/util/data_packing.py" \
-       "$HOST:~/$REMOTE/driver/finn/util/data_packing.py"
+# FINN dev's MakePYNQDriver ships a data_packing.py matching its own driver_base and
+# importing nothing the board lacks, so the feature/deconv-era copy of FINN's file is
+# no longer needed here.
 
 # Newer qonnx (the merged FINN image) has a module-level `from onnx import GraphProto,
 # ModelProto` in qonnx/util/basic.py, used only as annotations on qonnx_make_model.

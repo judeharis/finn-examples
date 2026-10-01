@@ -46,7 +46,7 @@ def main():
     p.add_argument("--batchsize", type=int, default=1)
     p.add_argument("--runs", type=int, default=5, help="timed repetitions")
     p.add_argument("--platform", default="zynq-iodma")
-    p.add_argument("--runtime-weight-dir", default="runtime_weights/")
+    p.add_argument("--weight-dir", default="weights/")
     # driver_base defaults fclk_mhz to 100, but the build targeted
     # synth_clk_period_ns=5.0 (200 MHz) and post-route timing closed with
     # WNS +0.150 ns / 0 failing endpoints. Leaving it at 100 halves throughput
@@ -60,7 +60,7 @@ def main():
         io_shape_dict=io_shape_dict,
         batch_size=args.batchsize,
         fclk_mhz=args.fclk,
-        runtime_weight_dir=args.runtime_weight_dir,
+        weight_dir=args.weight_dir,
     )
     print(f"accelerator clock: {args.fclk} MHz")
     ishape, oshape = accel.ishape_normal(), accel.oshape_normal()

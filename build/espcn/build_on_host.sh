@@ -18,7 +18,7 @@ set -uo pipefail
 
 # The FINN fork is a peer of finn-examples, not upstream's build/finn clone
 # (get-finn.sh) -- do not run get-finn.sh. Override FINN_DIR to use another checkout.
-FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
+FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/forked/finn}"
 ESPCN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Default: fused Deconvolution_hls layer, into output_espcn-bsd300_kriasom/.
 # ESPCN_FUSED_DECONV=0 ./build_on_host.sh  builds the original pixel-padding version into

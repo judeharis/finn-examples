@@ -11,7 +11,8 @@
 # never runs, and the container exits 0 looking like a success.
 set -euo pipefail
 
-ESPCN_DIR=/mnt/Crucial/WorkspaceB/AMD/finn-examples/build/espcn
+# the directory this script lives in (build_on_host.sh mounts it at the same path)
+ESPCN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "=== in-container build starting $(date -Is) ==="
 echo "FINN_ROOT=${FINN_ROOT:-unset}  FINN_BUILD_DIR=${FINN_BUILD_DIR:-unset}  HOME=${HOME:-unset}"

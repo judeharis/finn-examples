@@ -101,8 +101,9 @@ cfg = build_cfg.DataflowBuildConfig(
     board="KV260_SOM",
     enable_build_pdb_debug=False,
     verbose=False,
-    split_large_fifos=True,
-    # Jude: Edited
+    # Jude: Edited, Removed
+    # split_large_fifos removed: FINN dev dropped it from DataflowBuildConfig (consolidated
+    # FIFO, afab4dd3f). All 19 FIFOs in the feature/deconv build had depth 2, so it never split.
     folding_config_file=folding_config,
     # Jude: Done
     auto_fifo_depths=False,

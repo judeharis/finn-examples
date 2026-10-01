@@ -5,7 +5,8 @@
 # DECONV_PE / DECONV_SIMD / DECONV_CLK_NS arrive as `docker -e`, set by build_on_host.sh.
 set -euo pipefail
 
-DECONV_DIR=/mnt/Crucial/WorkspaceB/AMD/finn-examples/build/deconv_board
+# the directory this script lives in (build_on_host.sh mounts it at the same path)
+DECONV_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "=== in-container build starting $(date -Is) ==="
 echo "FINN_ROOT=${FINN_ROOT:-unset}  FINN_BUILD_DIR=${FINN_BUILD_DIR:-unset}  HOME=${HOME:-unset}"

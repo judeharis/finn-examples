@@ -69,7 +69,7 @@ def main():
         io_shape_dict=io_shape_dict,
         batch_size=1,
         fclk_mhz=fclk,
-        runtime_weight_dir="runtime_weights/",
+        weight_dir="weights/",
     )
     # The stock pack/unpack take minutes per frame for UINT4/INT32 on the A53s.
     fast_packing.install(accel)

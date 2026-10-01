@@ -61,11 +61,9 @@ echo "shipping to $HOST:~/$REMOTE ..."
 ssh "$HOST" "rm -rf ~/$REMOTE && mkdir -p ~/$REMOTE"
 scp -q -r "$DEPLOY"/* "$HOST:~/$REMOTE/"
 scp -q "$STAGE"/* "$HOST:~/$REMOTE/driver/"
-# Same guarded-import fix as the ESPCN deploy: without it the generated driver dies
-# on `import qonnx.core.modelwrapper`, which the shipped qonnx subset lacks.
-FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
-scp -q "$FINN_DIR/src/finn/util/data_packing.py" \
-       "$HOST:~/$REMOTE/driver/finn/util/data_packing.py"
+# FINN dev's MakePYNQDriver ships a data_packing.py matching its own driver_base and
+# importing nothing the board lacks, so the feature/deconv-era copy of FINN's file is
+# no longer needed here.
 
 # Newer qonnx (the merged FINN image) has a module-level `from onnx import GraphProto,
 # ModelProto` in qonnx/util/basic.py, used only as annotations on qonnx_make_model.

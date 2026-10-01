@@ -16,7 +16,7 @@ SIMD="${2:-1}"
 CLK_NS="${3:-5.0}"
 
 # The FINN fork is a peer of finn-examples (not upstream's build/finn clone).
-FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/finn}"
+FINN_DIR="${FINN_DIR:-/mnt/Crucial/WorkspaceB/AMD/forked/finn}"
 DECONV_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG="${DECONV_DIR}/build_on_host_pe${PE}_simd${SIMD}_${CLK_NS}ns.log"
 
