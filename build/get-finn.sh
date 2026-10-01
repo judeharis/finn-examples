@@ -27,10 +27,14 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# Jude: Edited
 # URL for git repo to be cloned
-REPO_URL=https://github.com/Xilinx/finn
-# commit hash for repo
-REPO_COMMIT=feature/deconv
+REPO_URL=https://github.com/judeharis/finn
+# commit hash for repo: judeharis/finn jude/deconv-dev as validated on the KV260 2026-10-01
+# (ESPCN fused + pixel padding and deconv_board bit-exact). A full hash, since the script
+# compares it with rev-parse HEAD; a branch name never matches.
+REPO_COMMIT=a6001bfb32c3c35519336797ba75494c4d95c935
+# Jude: Done
 # directory (under the same folder as this script) to clone to
 REPO_DIR=finn
 
