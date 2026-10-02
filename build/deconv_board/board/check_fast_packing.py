@@ -10,7 +10,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-FINN_DIR = os.environ.get("FINN_DIR", "/mnt/Crucial/WorkspaceB/AMD/forked/finn")
+FINN_DIR = os.environ.get("FINN_DIR", "/mnt/Crucial/WorkspaceB/AMD/finn")
 sys.path.insert(0, os.path.join(FINN_DIR, "src"))
 from qonnx.core.datatype import DataType  # noqa: E402
 from qonnx.util.basic import gen_finn_dt_tensor  # noqa: E402
