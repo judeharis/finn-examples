@@ -31,10 +31,10 @@
 # Jude: Edited
 # URL for git repo to be cloned
 REPO_URL=https://github.com/judeharis/finn
-# commit hash for repo: judeharis/finn jude/deconv-dev as validated on the KV260 2026-10-01
+# commit hash for repo: judeharis/finn jude/deconv-dev as validated on the KV260 2026-10-02
 # (ESPCN fused + pixel padding and deconv_board bit-exact). A full hash, since the script
 # compares it with rev-parse HEAD; a branch name never matches.
-REPO_COMMIT=a6001bfb32c3c35519336797ba75494c4d95c935
+REPO_COMMIT=0fcf5a6c1ed920e62409eaef99eb176bfa0aaded
 # Jude: Done
 # directory (under the same folder as this script) to clone to
 REPO_DIR=finn
