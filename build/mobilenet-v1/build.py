@@ -1,4 +1,5 @@
-# Copyright (c) 2020, Xilinx
+# Copyright (C) 2020-2022, Xilinx, Inc.
+# Copyright (C) 2024, Advanced Micro Devices, Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -35,18 +36,20 @@ import shutil
 # custom steps for mobilenetv1
 from custom_steps import (
     step_mobilenet_streamline,
-    step_mobilenet_convert_to_hls_layers,
-    step_mobilenet_convert_to_hls_layers_separate_th,
+    step_mobilenet_convert_to_hw_layers,
+    step_mobilenet_convert_to_hw_layers_separate_th,
     step_mobilenet_lower_convs,
     step_mobilenet_slr_floorplan,
 )
 
 model_name = "mobilenetv1-w4a4"
+model_file = "models/%s_pre_post_tidy_opset-11.onnx" % model_name
+
+verif_en = os.getenv("VERIFICATION_EN", "0")
+
 
 # which platforms to build the networks for
-# zynq_platforms = ["ZCU102", "ZCU104"]
-zynq_platforms = ["ZCU102"]
-# alveo_platforms = ["U50", "U200", "U250", "U280"]
+zynq_platforms = ["ZCU104", "ZCU102"]
 alveo_platforms = ["U250"]
 platforms_to_build = zynq_platforms + alveo_platforms
 
@@ -75,12 +78,14 @@ def select_build_steps(platform):
         return [
             step_mobilenet_streamline,
             step_mobilenet_lower_convs,
-            step_mobilenet_convert_to_hls_layers_separate_th,
+            step_mobilenet_convert_to_hw_layers_separate_th,
             "step_create_dataflow_partition",
+            "step_specialize_layers",
             "step_apply_folding_config",
+            "step_minimize_bit_width",
             "step_generate_estimate_reports",
-            "step_hls_codegen",
-            "step_hls_ipgen",
+            "step_hw_codegen",
+            "step_hw_ipgen",
             "step_set_fifo_depths",
             "step_create_stitched_ip",
             "step_synthesize_bitfile",
@@ -91,13 +96,16 @@ def select_build_steps(platform):
         return [
             step_mobilenet_streamline,
             step_mobilenet_lower_convs,
-            step_mobilenet_convert_to_hls_layers,
+            step_mobilenet_convert_to_hw_layers,
             "step_create_dataflow_partition",
+            "step_specialize_layers",
             "step_apply_folding_config",
+            "step_minimize_bit_width",
             "step_generate_estimate_reports",
-            "step_hls_codegen",
-            "step_hls_ipgen",
+            "step_hw_codegen",
+            "step_hw_ipgen",
             "step_set_fifo_depths",
+            "step_create_stitched_ip",
             step_mobilenet_slr_floorplan,
             "step_synthesize_bitfile",
             "step_make_pynq_driver",
@@ -107,7 +115,6 @@ def select_build_steps(platform):
 
 # create a release dir, used for finn-examples release packaging
 os.makedirs("release", exist_ok=True)
-
 
 for platform_name in platforms_to_build:
     shell_flow_type = platform_to_shell(platform_name)
@@ -141,10 +148,28 @@ for platform_name in platforms_to_build:
             build_cfg.DataflowOutputType.ESTIMATE_REPORTS,
             build_cfg.DataflowOutputType.BITFILE,
             build_cfg.DataflowOutputType.DEPLOYMENT_PACKAGE,
+            build_cfg.DataflowOutputType.STITCHED_IP,
         ],
+        specialize_layers_config_file="specialize_layers_config/%s_specialize_layers.json"
+        % platform_name,
     )
-    model_file = "models/%s_pre_post_tidy.onnx" % model_name
-    build.build_dataflow_cfg(model_file, cfg)
+    if verif_en == "1":
+        # Build the model with verification
+        import sys
+
+        sys.path.append(os.path.abspath(os.getenv("FINN_EXAMPLES_ROOT") + "/ci/"))
+        from verification_funcs import init_verif, verify_build_output
+
+        cfg.verify_steps, cfg.verify_input_npy, cfg.verify_expected_output_npy = init_verif(
+            model_name
+        )
+        if "stitched_ip_rtlsim" in cfg.verify_steps:
+            cfg.verify_steps.remove("stitched_ip_rtlsim")
+        build.build_dataflow_cfg(model_file, cfg)
+        verify_build_output(cfg, model_name)
+    else:
+        # Build the model without verification
+        build.build_dataflow_cfg(model_file, cfg)
 
     # copy bitfiles and runtime weights into release dir if found
     bitfile_gen_dir = cfg.output_dir + "/bitfile"
